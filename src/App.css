@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 .App {
   text-align: center;
 }
@@ -28,6 +31,19 @@
   color: #61dafb;
 }
 
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+
+  flex-direction: column;
+}
+
+.main-header{
+  font-family: 'Montserrat', sans-serif;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +51,7 @@
   to {
     transform: rotate(360deg);
   }
+
+
+  
 }
