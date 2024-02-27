@@ -1,8 +1,11 @@
 import React,{ useState } from 'react'
 import { FormField, Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create () {
+
+  let navigate = useNavigate();
     const [employeeFirstName, setEmployeeFirstName] = useState('');
     const [employeeLastName, setEmployeeLastName] = useState('');
     const [designation, setDesignation] = useState('');
@@ -28,6 +31,7 @@ export default function Create () {
             salary,
             designation
         }).then(response => {
+          navigate("/read");
             console.log("Success!");
           })
           .catch(error => {
