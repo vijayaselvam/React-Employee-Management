@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "semantic-ui-react";
+import { Table, Button,LabelGroup,Label} from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-
 
 export default function Read() {
 
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://localhost:7022/api/Employee/GetAllEmployees`)
+      .get(`http://localhost:8888/api/Employee/GetAllEmployees`)
       .then((response) => {
         setAPIData(response.data);
       })
@@ -49,7 +47,7 @@ export default function Read() {
   const onDelete = (employeeId) => {
     axios
       .delete(
-        `https://localhost:7022/api/Employee/DeleteEmployee?id=${employeeId}`
+        `http://localhost:8888/api/Employee/DeleteEmployee?id=${employeeId}`
       )
       .then(() => {
         getData();
@@ -72,19 +70,21 @@ export default function Read() {
         <Table.Body>
           {APIData.map((data) => {
             return (
-              <Table.Row>
-                <Table.Cell>{data.employeeFirstName}</Table.Cell>
+              <Table.Row key={data.employeeId}>
+                <Table.Cell >{data.employeeFirstName}</Table.Cell>
                 <Table.Cell>{data.employeeLastName}</Table.Cell>
                 <Table.Cell>{data.designation}</Table.Cell>
-                <Table.Cell>{data.salary}</Table.Cell>
-
-                <Link to="/update">
+                <LabelGroup tag>
+                <Table.Cell><Label as='a'>{data.salary}</Label></Table.Cell>
+                </LabelGroup>
                   <Table.Cell>
-                    <Button onClick={() => setData(data)}>Update</Button>
+                  <Link to="/update">
+                    <Button primary onClick={() => setData(data)}>Update</Button>
+                    </Link>
                   </Table.Cell>
-                </Link>
+                
                 <Table.Cell>
-                  <Button onClick={() => onDelete(data.employeeId)}>
+                  <Button negative onClick={() => onDelete(data.employeeId)}>
                     Delete
                   </Button>
                 </Table.Cell>

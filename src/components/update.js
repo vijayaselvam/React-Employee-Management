@@ -21,7 +21,7 @@ export default function Update() {
   }, []);
 
   const updateAPIData = () => {
-    axios.post(`https://localhost:7022/api/Employee/SaveEmployees`, {
+    axios.post(`http://localhost:8888/api/Employee/SaveEmployees`, {
       employeeId,
       employeeFirstName,
       employeeLastName,
@@ -32,6 +32,9 @@ export default function Update() {
     });
   };
 
+  const homePageNavigate = () => {
+    navigate("/read");
+  };
   return (
     <div>
       <Form className="create-form">
@@ -68,8 +71,11 @@ export default function Update() {
             onChange={(e) => setSalary(e.target.value)}
           />
         </Form.Field>
-        <Button type="submit" onClick={updateAPIData}>
+        <Button positive type="submit" onClick={updateAPIData}>
           Update
+        </Button>
+        <Button negative type="submit" onClick={homePageNavigate}>
+          Cancel
         </Button>
       </Form>
     </div>

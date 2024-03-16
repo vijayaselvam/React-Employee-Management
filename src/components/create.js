@@ -13,7 +13,7 @@ export default function Create () {
     const [employeesMaster, setEmployeesMaster] = useState([]);
     var empId = 0;
     const getData = () => {
-        axios.get(`https://localhost:7022/api/Employee/GetAllEmployees`).then(response => {
+        axios.get(`http://localhost:8888/api/Employee/GetAllEmployees`).then(response => {
             setEmployeesMaster(response.data);
             console.log("Call");
             console.log(response.data);
@@ -24,7 +24,7 @@ export default function Create () {
     }
 
     const postData = () => {
-        axios.post(`https://localhost:7022/api/Employee/SaveEmployees`, {
+        axios.post(`http://localhost:8888/api/Employee/SaveEmployees`, {
             empId,
             employeeFirstName,
             employeeLastName,

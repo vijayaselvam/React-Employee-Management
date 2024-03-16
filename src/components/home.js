@@ -1,13 +1,13 @@
-import Create from "./create";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { Button } from "semantic-ui-react";
+import history from "./Routes/history";
 export default function Home() {
   return (
-    <div >
-      <h1 className="main-header">Employee Management</h1>
-      <div>
-        <Create />
-      </div>
-    </div>
+    
+      <form>
+        <Button variant="btn btn-success" onClick={() => history.push("/read")}>
+         Employees
+        </Button>
+      </form>
+
   );
 }

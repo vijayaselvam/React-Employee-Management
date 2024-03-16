@@ -1,27 +1,16 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Create from "./components/create";
-import Read from "./components/read";
-import Update from "./components/update";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { HeaderContent, Header, Icon, Image } from 'semantic-ui-react'
+import RoutesNav from "./components/Routes/routes";
 function App() {
   return (
     <div className="main">
       <div>
-        <h1 className="main-header">Employee Management</h1>
+        <Header as="h2" icon textAlign="center">
+          <Icon name="users" circular />
+          <HeaderContent>Employee Management</HeaderContent>
+        </Header>
       </div>
-      <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/create" element={<Create />} />
-
-            <Route path="/read" element={<Read />} />
-
-            <Route path="/update" element={<Update />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <RoutesNav />
     </div>
   );
 }
