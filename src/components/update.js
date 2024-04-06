@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "semantic-ui-react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Update() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const [employeeFirstName, setEmployeeFirstName] = useState("");
   const [employeeLastName, setEmployeeLastName] = useState("");
@@ -21,15 +21,26 @@ export default function Update() {
   }, []);
 
   const updateAPIData = () => {
-    axios.post(`http://localhost:8888/api/Employee/SaveEmployees`, {
-      employeeId,
-      employeeFirstName,
-      employeeLastName,
-      designation,
-      salary,
-    }).then(() => {
-        navigate("/read");
-    });
+    if (
+      employeeFirstName.length > 0 &&
+      employeeLastName.length &&
+      salary > 0 &&
+      designation.length > 0
+    ) {
+      axios
+        .post(`http://localhost:8888/api/Employee/SaveEmployees`, {
+          employeeId,
+          employeeFirstName,
+          employeeLastName,
+          designation,
+          salary,
+        })
+        .then(() => {
+          navigate("/read");
+        });
+    } else {
+      alert("Fill All Details!!!");
+    }
   };
 
   const homePageNavigate = () => {

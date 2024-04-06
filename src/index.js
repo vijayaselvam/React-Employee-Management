@@ -11,9 +11,10 @@ import history from "./components/Routes/history";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
+  //If Strict mode enabled the api will call multiple times while used in Use Effect(page load).
   <React.StrictMode>
     <BrowserRouter history={history}>
-      <NavBar></NavBar>
+      <NavBar/>
       <App />
     </BrowserRouter>
   </React.StrictMode>
