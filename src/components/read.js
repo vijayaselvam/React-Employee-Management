@@ -10,23 +10,24 @@ export default function Read() {
 
   //Using - Axios Instance - Instance created in one place and utilized in all over application
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await instance.get(
-          `/GetAllEmployees`
-        );
-        if (response.status === 200) {
-          setAPIData(response.data);
-          setLoading(true);
-        } else {
-          setLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await instance.get(
+        `/GetAllEmployees`
+      );
+      if (response.status === 200) {
+        setAPIData(response.data);
+        setLoading(true);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -162,17 +163,7 @@ export default function Read() {
   //   fetchData();
   // }, []);
 
-  const getData = () => {
-    try {
-      axios
-        .get(`http://localhost:8888/api/Employee/GetAllEmployees`)
-        .then((response) => {
-          setAPIData(getData.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   const setData = (data) => {
     console.log(data);
@@ -192,14 +183,19 @@ export default function Read() {
     localStorage.setItem("Salary", salary);
   };
 
-  const onDelete = (employeeId) => {
-    axios
-      .delete(
-        `http://localhost:8888/api/Employee/DeleteEmployee?id=${employeeId}`
-      )
-      .then(() => {
-        getData();
-      });
+  const onDelete = async (employeeId) => {
+    try {
+      const response = await instance.delete(
+        `/DeleteEmployee?id=${employeeId}`
+      );
+      if (response.status === 200) {
+        fetchData();
+      } else {
+      
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "semantic-ui-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { instance } from "./Axios";
 export default function Update() {
   let navigate = useNavigate();
 
@@ -20,26 +20,29 @@ export default function Update() {
     setSalary(localStorage.getItem("Salary"));
   }, []);
 
-  const updateAPIData = () => {
-    if (
-      employeeFirstName.length > 0 &&
-      employeeLastName.length &&
-      salary > 0 &&
-      designation.length > 0
-    ) {
-      axios
-        .post(`http://localhost:8888/api/Employee/SaveEmployees`, {
+  const updateAPIData = async () => {
+    try {
+      if (
+        employeeFirstName.length > 0 &&
+        employeeLastName.length &&
+        salary > 0 &&
+        designation.length > 0
+      ) {
+        const response = await instance.post(`/SaveEmployees`, {
           employeeId,
           employeeFirstName,
           employeeLastName,
           designation,
           salary,
-        })
-        .then(() => {
-          navigate("/read");
         });
-    } else {
-      alert("Fill All Details!!!");
+        if (response.status === 200) {
+          navigate("/read");
+        }
+      } else {
+        alert("Fill All Details!!!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
